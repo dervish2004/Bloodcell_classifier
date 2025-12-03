@@ -1,7 +1,7 @@
 from flask import Flask, render_template, request
 from tensorflow.keras.models import load_model
 from tensorflow.keras.preprocessing import image
-import tensorflow as tf  # ✅ <-- ADD THIS
+import tensorflow as tf
 import numpy as np
 import os
 
@@ -30,4 +30,5 @@ def predict():
     return render_template('result.html', result=result, image=path)
 
 if __name__ == '__main__':
-    app.run(debug=True)
+    port = int(os.environ.get("PORT", 5000))  # ✅ Use Render's PORT
+    app.run(host="0.0.0.0", port=port, debug=True)  # ✅ Bind to all IPs
